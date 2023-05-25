@@ -10,6 +10,8 @@ import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.servise.UserService;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Controller
@@ -38,8 +40,13 @@ public class UserController {
         return "new";
     }
     @PostMapping()
-    public String create(@ModelAttribute("user") @Valid User user, BindingResult bindingResult){
+    public String create(@ModelAttribute("user") @Valid User user, BindingResult bindingResult,
+                         @RequestParam(value ="roles", required = false) List<Integer> idRoles){
         if (bindingResult.hasErrors())
+            return "new";
+        if(idRoles != null)
+            user.setRoles(idRoles.stream().map(i -> userService.findAllRoles().get(i - 1)).collect(Collectors.toList()));
+        if (userService.userAlreadyExist(user.getUsername()))
             return "new";
         userService.save(user);
         return "redirect:/admin";
@@ -50,8 +57,13 @@ public class UserController {
         return "edit";
     }
     @PatchMapping("/{id}")
-    public String update(@ModelAttribute("user") @Valid User user, BindingResult bindingResult, @PathVariable("id") int id){
+    public String update(@ModelAttribute("user") @Valid User user, BindingResult bindingResult,
+                         @PathVariable("id") int id, @RequestParam(value ="roles", required = false) List<Integer> idRoles){
         if (bindingResult.hasErrors())
+            return "edit";
+        if(idRoles != null)
+            user.setRoles(idRoles.stream().map(i -> userService.findAllRoles().get(i - 1)).collect(Collectors.toList()));
+        if (userService.userAlreadyExist(user.getUsername()))
             return "edit";
         userService.update(id,user);
         return "redirect:/admin";

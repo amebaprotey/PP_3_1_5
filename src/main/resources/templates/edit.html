@@ -17,6 +17,20 @@
   <div style="color: red" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">Surname error</div>
   <br/>
   <br/>
+  <lable for="username">Enter username: </lable>
+  <input type="text" th:field="*{username}" id="username"/>
+  <div style="color: red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username error</div>
+  <br/>
+  <br/>
+  <lable for="password">Enter password: </lable>
+  <input type="text" th:field="*{password}" id="password"/>
+  <br/>
+  <br/>
+  <p><select size="3" multiple name="roles" id="roles">
+    <option disabled>Выберите роли</option>
+    <option value="1">USER</option>
+    <option value="2">ADMIN</option>
+  </select></p>
   <input type="submit" value="Update!"/>
 </form>
 

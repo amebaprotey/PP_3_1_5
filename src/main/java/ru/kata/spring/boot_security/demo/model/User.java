@@ -16,7 +16,8 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
-
+    @Column(unique = true)
+    @NotEmpty(message = "Поле \"username\" не может быть пустым")
     private String username;
     private String password;
     @Column(name = "name")

@@ -8,7 +8,13 @@
 <p th:text="${user.getId()}">VALUE</p>
 <p th:text="${user.getName()}">VALUE</p>
 <p th:text="${user.getSurname()}">VALUE</p>
+<p th:text="${user.getUsername()}">VALUE</p>
+<p th:text="${user.getPassword()}">VALUE</p>
 
+<lable for="roles">Доступные роли</lable>
+<p><select size="3" multiple name="roles" id="roles">
+<option th:each="role : ${user.getRoles()}" th:text="${role}"/>
+</select></p>
 <a th:href="@{/admin/{id}/edit(id=${user.getId()})}">Edit</a>
 <br/>
 <br/>
