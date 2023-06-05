@@ -76,4 +76,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             return true;
     }
 
+    @Override
+    public User findByUsername(String username) {
+        Optional<User> user = userRepository.findByUsername(username);
+        return user.orElse(null);
+    }
+
 }

@@ -17,4 +17,5 @@ public interface UserService {
 
     void delete(int id);
     boolean userAlreadyExist(String username);
+    User findByUsername(String username);
 }
