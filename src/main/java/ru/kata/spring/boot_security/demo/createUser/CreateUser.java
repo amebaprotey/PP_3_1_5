@@ -10,7 +10,6 @@ import ru.kata.spring.boot_security.demo.servise.UserServiceImpl;
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 @Component
 public class CreateUser {
     private UserServiceImpl userServiceImpl;

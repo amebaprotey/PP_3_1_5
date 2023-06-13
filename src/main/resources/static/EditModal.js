@@ -12,7 +12,9 @@ async function showEditModal(id) {
     form.surname.value = user.surname;
     form.username.value = user.username;
     form.password.value = user.password;
-
+    $('#nameEditError').text('');
+    $('#surnameEditError').text('');
+    $('#usernameEditError').text('');
     // $('#rolesEditUser').empty();
 
     await fetch("http://localhost:8080/api/roles")

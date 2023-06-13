@@ -20,13 +20,14 @@ public class User implements UserDetails {
     @Column(unique = true)
     @NotEmpty(message = "Поле \"username\" не может быть пустым")
     private String username;
+    @NotEmpty(message = "Поле \"password\" не может быть пустым")
     private String password;
     @Column(name = "name")
     @NotEmpty(message = "Поле \"name\" не может быть пустым")
     @Pattern(regexp = "([a-zA-Zа-яА-я])*",message = "Введены не валидные символы")
     String name;
     @Column(name = "surname")
-    @NotEmpty(message = "Поле \"surname\" фамилия не может быть пустым")
+    @NotEmpty(message = "Поле \"surname\" не может быть пустым")
     @Pattern(regexp = "([a-zA-Zа-яА-я])*", message = "Введены не валидные символы")
     String surname;
 

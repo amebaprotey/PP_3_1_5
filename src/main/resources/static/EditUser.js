@@ -27,9 +27,20 @@ function editUser() {
                 password: editForm.password.value,
                 roles: editUserRoles
             })
-        }).then(() => {
-            $('#editFormCloseButton').click();
-            allUsers();
+        }).then(response => {
+            if (response.ok){
+                $('#editFormCloseButton').click();
+                allUsers();
+            }else {
+                return response
+                    .json().then(errorsJson => {
+                        const errors = errorsJson.info.split(';')
+                        errors.forEach(error => {
+                            const [field, message] = error.split(' - ');
+                            $(`#${field}EditError`).text(message);
+                        })
+                })
+            }
         })
     })
 }

@@ -13,9 +13,10 @@ async function newUser() {
             })
         })
 
-    const form = document.forms["formNewUser"];
+    let form = document.forms["formNewUser"];
 
     form.addEventListener('submit', addNewUser)
+
 
     function addNewUser(e) {
         e.preventDefault();
@@ -38,10 +39,21 @@ async function newUser() {
                 password: form.password.value,
                 roles: newUserRoles
             })
-        }).then(() => {
-            form.reset();
-            allUsers();
-            $('#allUsersTable').click();
+        }).then((response) => {
+            if (response.ok) {
+                form.reset();
+                allUsers();
+                $('#allUsersTable').click();
+            }else {
+                return response
+                    .json().then(errorsJson => {
+                        const errors = errorsJson.info.split(';')
+                        errors.forEach(error => {
+                            const [field, message] = error.split(' - ');
+                            $(`#${field}NewError`).text(message);
+                        })
+                    })
+            }
         })
     }
 
