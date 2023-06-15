@@ -8,8 +8,9 @@ import ru.kata.spring.boot_security.demo.repositories.RoleRepository;
 import ru.kata.spring.boot_security.demo.servise.UserServiceImpl;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
+
 @Component
 public class CreateUser {
     private UserServiceImpl userServiceImpl;
@@ -30,10 +31,10 @@ public class CreateUser {
         roleRepository.save(roleAdmin);
         roleRepository.save(roleUser);
 
-        List<Role> roleListAdmin = new ArrayList<>();
+        Set<Role> roleListAdmin = new HashSet<>();
         roleListAdmin.add(roleAdmin);
 
-        List<Role> roleListUser = new ArrayList<>();
+        Set<Role> roleListUser = new HashSet<>();
         roleListUser.add(roleUser);
 
         User admin = new User("admin","admin","Админ","Админ", roleListAdmin);

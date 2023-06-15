@@ -15,7 +15,7 @@ async function showEditModal(id) {
     $('#nameEditError').text('');
     $('#surnameEditError').text('');
     $('#usernameEditError').text('');
-    // $('#rolesEditUser').empty();
+    $('#rolesEditUser').empty();
 
     await fetch("http://localhost:8080/api/roles")
         .then(res => res.json())

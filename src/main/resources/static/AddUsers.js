@@ -13,7 +13,7 @@ async function newUser() {
             })
         })
 
-    let form = document.forms["formNewUser"];
+    const form = document.forms["formNewUser"];
 
     form.addEventListener('submit', addNewUser)
 
@@ -24,7 +24,7 @@ async function newUser() {
         for (let i = 0; i < form.roles.options.length; i++) {
             if (form.roles.options[i].selected) newUserRoles.push({
                 id : form.roles.options[i].value,
-                name : form.roles.options[i].name
+                name : "ROLE_" + form.roles.options[i].text
             })
         }
         fetch("http://localhost:8080/api/users", {

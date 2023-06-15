@@ -3,12 +3,12 @@ package ru.kata.spring.boot_security.demo.model;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Entity
@@ -30,21 +30,18 @@ public class User implements UserDetails {
     @NotEmpty(message = "Поле \"surname\" не может быть пустым")
     @Pattern(regexp = "([a-zA-Zа-яА-я])*", message = "Введены не валидные символы")
     String surname;
-
     @ManyToMany
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private List<Role> roles;
-
-
+    private Set<Role> roles;
 
     public User(String name, String surname) {
         this.name = name;
         this.surname = surname;
     }
 
-    public User(String username, String password, String name, String surname, List<Role> roles) {
+    public User(String username, String password, String name, String surname, Set<Role> roles) {
         this.username = username;
         this.password = password;
         this.name = name;
@@ -80,11 +77,11 @@ public class User implements UserDetails {
         this.surname = surname;
     }
 
-    public List<Role> getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<Role> roles) {
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
 
@@ -98,7 +95,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<Role> roles1= getRoles();
+        Set<Role> roles1= getRoles();
         return getRoles();
     }
 

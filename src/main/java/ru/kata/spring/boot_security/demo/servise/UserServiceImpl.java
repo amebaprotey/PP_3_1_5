@@ -12,10 +12,8 @@ import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.repositories.RoleRepository;
 import ru.kata.spring.boot_security.demo.repositories.UserRepository;
-
 import java.util.List;
 import java.util.Optional;
-
 
 @Service
 @Transactional(readOnly = true)
